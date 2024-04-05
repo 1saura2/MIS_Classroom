@@ -2,7 +2,8 @@
 
 namespace MIS_Classroom.Areas.Teacher.Controllers
 {
-    public class TeacherController : Controller
+    [Area("Teacher")]
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {
