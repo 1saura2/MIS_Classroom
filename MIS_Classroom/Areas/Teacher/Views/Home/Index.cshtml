@@ -1,19 +1,23 @@
 ﻿<body>
-    <h1>Add Questions</h1>
-    <form action="" method="post">
-        <label for="subject">Subject:</label>
-        <select name="subject" id="subject">
-            <option value="1">MIS</option>
-            <option value="2">MAD</option>
-            <option value="3">SAD</option>
-            <option value="4">MFCS</option>
-            <option value="5">NM</option>
-        </select>
-        <br><br>
-        <label for="question">Question:</label><br>
-        <textarea name="question" id="question" rows="4" cols="50"></textarea>
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container">
+        <h1 class="mt-5">Add Questions</h1>
+        <form action="" method="post" class="mt-4">
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject:</label>
+                <select name="subject" id="subject" class="form-select">
+                    <option value="1">MIS</option>
+                    <option value="2">MAD</option>
+                    <option value="3">SAD</option>
+                    <option value="4">MFCS</option>
+                    <option value="5">NM</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="question" class="form-label">Question:</label>
+                <textarea name="question" id="question" rows="4" cols="50" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </body>
-<h1>helloooooooo</h1>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />

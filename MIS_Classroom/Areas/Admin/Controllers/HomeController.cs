@@ -2,8 +2,8 @@
 
 namespace MIS_Classroom.Areas.Admin.Controllers
 {
-
-    public class AdminController : Controller
+    [Area("Admin")]
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {

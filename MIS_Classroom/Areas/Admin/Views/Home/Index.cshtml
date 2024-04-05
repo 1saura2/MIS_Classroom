@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 bg-light">
+                <div class="sidebar">
+                    <h2 class="mt-5">Admin Dashboard</h2>
+                    <select class="form-select mt-3" id="managementSelect">
+                        <option value="teacher">Teacher Management</option>
+                        <option value="student">Student Management</option>
+                    </select>
+                </div>
+            </div>
+            <!-- /Sidebar -->
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="container mt-5">
+                    <!-- Management Section -->
+                    <div id="managementSection">
+                        <!-- Content will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+            <!-- /Main Content -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Sample data for teachers and students (replace with real data from backend)
+        const teachers = [
+            { id: 1, name: "John Doe", email: "john@example.com" },
+            { id: 2, name: "Jane Smith", email: "jane@example.com" }
+        ];
+
+        const students = [
+            { id: 1, name: "Alice Johnson", email: "alice@example.com" },
+            { id: 2, name: "Bob Williams", email: "bob@example.com" }
+        ];
+
+        // Function to render teacher records
+        function renderTeachers() {
+            const teacherTableBody = $('#managementContent');
+            teacherTableBody.empty();
+            $.each(teachers, function (index, teacher) {
+                const row = `
+                                    <tr>
+                                        <td>${teacher.id}</td>
+                                        <td>${teacher.name}</td>
+                                        <td>${teacher.email}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning">Edit</button>
+                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                `;
+                teacherTableBody.append(row);
+            });
+        }
+
+        // Function to render student records
+        function renderStudents() {
+            const studentTableBody = $('#managementContent');
+            studentTableBody.empty();
+            $.each(students, function (index, student) {
+                const row = `
+                                    <tr>
+                                        <td>${student.id}</td>
+                                        <td>${student.name}</td>
+                                        <td>${student.email}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning">Edit</button>
+                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                `;
+                studentTableBody.append(row);
+            });
+        }
+
+        // Function to switch between teacher and student management
+        $('#managementSelect').change(function () {
+            const selectedOption = $(this).val();
+            if (selectedOption === 'teacher') {
+                $('#managementSection').html(`
+                            <h2>Teacher Management</h2>
+                            <button class="btn btn-primary" id="addTeacherBtn">Add Teacher</button>
+                            <table class="table mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="managementContent">
+                                    <!-- Teacher records will be displayed here -->
+                                </tbody>
+                            </table>
+                        `);
+                renderTeachers();
+            } else if (selectedOption === 'student') {
+                $('#managementSection').html(`
+                            <h2>Student Management</h2>
+                            <button class="btn btn-primary" id="addStudentBtn">Add Student</button>
+                            <table class="table mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="managementContent">
+                                    <!-- Student records will be displayed here -->
+                                </tbody>
+                            </table>
+                        `);
+                renderStudents();
+            }
+        });
+
+        // Event listener for Add Teacher button
+        $(document).on('click', '#addTeacherBtn', function () {
+            alert('Functionality to add a teacher goes here!');
+        });
+
+        // Event listener for Add Student button
+        $(document).on('click', '#addStudentBtn', function () {
+            alert('Functionality to add a student goes here!');
+        });
+    </script>
+</body>
+</html>
