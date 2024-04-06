@@ -1,89 +1,55 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Josefin+Slab');
-
-* {
-    box-sizing: border-box;
+﻿
+.header-right {
+    float: right;
 }
 
-body {
-    background-color: #eee;
+.main-content {
+    color: #09206F;
+    background-color: #F0F3F8;
+    padding: 20px; 
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    margin-left: 50px; 
+    
 }
 
-h1 {
-    position: relative;
-    top: 25px;
-    left: 75px;
-    font-family: 'Josefin Slab', sans-serif;
+
+.subject-view {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+    border-radius: 20px;
+    overflow: hidden; 
+    margin-top: 20px; 
 }
 
-h2 {
-    position: relative;
-    top: 40px;
-    left: 75px;
-    font-family: 'Josefin Slab', sans-serif;
+.tab {
+    display: flex; 
+    flex-direction: column; 
 }
 
-.filters {
-    position: relative;
-    top: 50px;
-    left: 75px;
-}
-
-.subject {
-    display: inline-block;
-    padding: 10px 18px;
-    margin-bottom: 10px;
-    background: #eee;
-    color: #333;
-    font-family: 'Josefin Sans';
-    font-size: 18px;
-    cursor: pointer;
-}
-
-    .subject:hover {
-        background-color: #720eff;
-        color: #eee;
+    .tab button {
+        background-color: #337ab7;
+        color: #F0F3F8;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 20px 30px; 
+        transition: background-color 0.3s, color 0.3s, transform 0.2s ease-in-out; 
+        font-size: 16px; 
+        margin: 10px 0;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     }
 
-    .subject.selected {
-        background-color: #720eff;
-        color: #eee;
-    }
+        .tab button:hover {
+            background-color: #09206F;
+            color: #fff;
+        }
 
-.grid {
-    position: relative;
-    width: 90%;
-    margin: 50px auto;
-    border-top: 1px solid #333;
-    perspective: 200px;
-}
-
-
-/* .grid:after {
-  content: '';
-  display: block;
-  clear: both;
-}
- */
-
-
-.book-subject {
-    position: relative;
-}
-
-    .book-subject > * {
-        margin: 0;
-        padding: 0;
-    }
-
-.book-image {
-    height: 200px;
-    width: 150px;
-    margin: 35px;
-    transition: transform .5s;
-    box-shadow: 1px 1px 5px 1px rgba(30, 30, 30, 0.6);
-}
-
-    .book-image:hover {
-        transform: translate3d(2px, 1px, 5px);
-        transition: transform .5s;
-    }
+        .tab button:active {
+            transform: scale(0.95); 
+        }
