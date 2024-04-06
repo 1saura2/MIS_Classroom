@@ -12,17 +12,19 @@ namespace MIS_Classroom.Areas.Admin.Controllers
 
         public HomeController(tattsContext context)
         {
-            _context = context;
+            _context = context;                  
         }
 
         public IActionResult Index()
         {
             var teachers = _context.TechengineeMisTeachers.ToList();
             var students = _context.TechengineeMisStudents.ToList();
+            var subjects = _context.TechengineeMisSubjects.ToList();
             var viewModel = new AdminDashboardViewModel
             {
                 TechengineeMisTeachers = teachers,
-                TechengineeMisStudents = students
+                TechengineeMisStudents = students,
+                TechengineeMisSubjects = subjects   
             };
             return View(viewModel);
         }

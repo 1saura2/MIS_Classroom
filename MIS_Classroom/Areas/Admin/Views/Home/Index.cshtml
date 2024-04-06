@@ -14,6 +14,7 @@
                 <select class="form-select mt-3" id="managementSelect">
                     <option value="teacher">Teacher Management</option>
                     <option value="student">Student Management</option>
+                    <option value="subject">Subject Management</option>
                 </select>
             </div>
         </div>
@@ -38,9 +39,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    // Sample data for teachers and students (replace with real data from backend)
+    // Sample data for teachers, students, and subjects (replace with real data from backend)
     const teachers = @Html.Raw(Json.Serialize(Model.TechengineeMisTeachers));
     const students = @Html.Raw(Json.Serialize(Model.TechengineeMisStudents));
+    const subjects = @Html.Raw(Json.Serialize(Model.TechengineeMisSubjects));
 
     // Function to render teacher records
     function renderTeachers() {
@@ -48,16 +50,16 @@
         teacherTableBody.empty();
         $.each(teachers, function (index, teacher) {
             const row = `
-                        <tr>
-                            <td>${teacher.teacherId}</td>
-                            <td>${teacher.name}</td>
-                            <td>${teacher.email}</td>
-                            <td>
-                                <button class="btn btn-sm btn-warning btn-management">Edit</button>
-                                <button class="btn btn-sm btn-danger btn-management">Delete</button>
-                            </td>
-                        </tr>
-                    `;
+                            <tr>
+                                <td>${teacher.teacherId}</td>
+                                <td>${teacher.name}</td>
+                                <td>${teacher.email}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning btn-management">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-management">Delete</button>
+                                </td>
+                            </tr>
+                        `;
             teacherTableBody.append(row);
         });
     }
@@ -68,61 +70,100 @@
         studentTableBody.empty();
         $.each(students, function (index, student) {
             const row = `
-                        <tr>
-                            <td>${student.studentId}</td>
-                            <td>${student.name}</td>
-                            <td>${student.email}</td>
-                            <td>
-                                <button class="btn btn-sm btn-warning btn-management">Edit</button>
-                                <button class="btn btn-sm btn-danger btn-management">Delete</button>
-                            </td>
-                        </tr>
-                    `;
+                            <tr>
+                                <td>${student.studentId}</td>
+                                <td>${student.name}</td>
+                                <td>${student.email}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning btn-management">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-management">Delete</button>
+                                </td>
+                            </tr>
+                        `;
             studentTableBody.append(row);
         });
     }
 
-    // Function to switch between teacher and student management
+    // Function to render subject records
+    function renderSubjects() {
+        const subjectTableBody = $('#managementContent');
+        subjectTableBody.empty();
+        $.each(subjects, function (index, subject) {
+            const row = `
+                            <tr>
+                                    <td>${subject.subjectName}</td>
+                                    <td>${subject.subjectCode}</td>
+                          
+                                <td>
+                                    <button class="btn btn-sm btn-warning btn-management">Edit</button>
+                                    <button class="btn btn-sm btn-danger btn-management">Delete</button>
+                                </td>
+                            </tr>
+                        `;
+            subjectTableBody.append(row);
+        });
+    }
+
+    // Function to switch between teacher, student, and subject management
     $('#managementSelect').change(function () {
         const selectedOption = $(this).val();
         if (selectedOption === 'teacher') {
             $('#managementSection').html(`
-                        <h2 class="management-title">Teacher Management</h2>
-                        <button class="btn btn-primary btn-management" id="addTeacherBtn">Add Teacher</button>
-                        <table class="management-table mt-3">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="managementContent">
-                                <!-- Teacher records will be displayed here -->
-                            </tbody>
-                        </table>
-                    `);
+                            <h2 class="management-title">Teacher Management</h2>
+                            <button class="btn btn-primary btn-management" id="addTeacherBtn">Add Teacher</button>
+                            <table class="management-table mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="managementContent">
+                                    <!-- Teacher records will be displayed here -->
+                                </tbody>
+                            </table>
+                        `);
             renderTeachers();
         } else if (selectedOption === 'student') {
             $('#managementSection').html(`
-                        <h2 class="management-title">Student Management</h2>
-                        <button class="btn btn-primary btn-management" id="addStudentBtn">Add Student</button>
-                        <table class="management-table mt-3">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="managementContent">
-                                <!-- Student records will be displayed here -->
-                            </tbody>
-                        </table>
-                    `);
+                            <h2 class="management-title">Student Management</h2>
+                            <button class="btn btn-primary btn-management" id="addStudentBtn">Add Student</button>
+                            <table class="management-table mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="managementContent">
+                                    <!-- Student records will be displayed here -->
+                                </tbody>
+                            </table>
+                        `);
             renderStudents();
+        } else if (selectedOption === 'subject') {
+            $('#managementSection').html(`
+                            <h2 class="management-title">Subject Management</h2>
+                            <button class="btn btn-primary btn-management" id="addSubjectBtn">Add Subject</button>
+                            <table class="management-table mt-3">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Name</th>
+                                        <th>Subject Code</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="managementContent">
+                                    <!-- Subject records will be displayed here -->
+                                </tbody>
+                            </table>
+                        `);
+            renderSubjects();
         }
     });
 
@@ -134,5 +175,10 @@
     // Event listener for Add Student button
     $(document).on('click', '#addStudentBtn', function () {
         alert('Functionality to add a student goes here!');
+    });
+
+    // Event listener for Add Subject button
+    $(document).on('click', '#addSubjectBtn', function () {
+        alert('Functionality to add a subject goes here!');
     });
 </script>
