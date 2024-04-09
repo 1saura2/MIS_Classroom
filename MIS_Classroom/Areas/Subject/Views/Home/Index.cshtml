@@ -1,22 +1,60 @@
-﻿<html>
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <title>Carnot</title>
+    <title>Subject</title>
     <link rel="stylesheet" href="~/css/sub.css" asp-append-version="true" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        /* Additional styles can be added here */
+        .question-container {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <sections>
+    <section>
         <div class="main-content">
-            <h2>Subjects</h2>
+            <h2>Question For Subjects</h2>
             <div class="subject-view">
                 <div class="tab">
-                    <a href="management_information_system.html"><button>Management Information System</button></a>
-                    <a href="mobile_application_development.html"><button>Mobile Application Development</button></a>
-                    <a href="numerical_methods.html"><button>Numerical Methods</button></a>
-                    <a href="mathematical_foundation_and_computer_science.html"><button>Mathematical Foundation And Computer Science</button></a>
-                    <a href="system_analysis_and_design.html"><button>System Analysis And Design</button></a>
+                    <button class="subject-button" data-subject="management_information_system">Management Information System</button>
+                    <button class="subject-button" data-subject="mobile_application_development">Mobile Application Development</button>
+                    <button class="subject-button" data-subject="numerical_methods">Numerical Methods</button>
+                    <button class="subject-button" data-subject="mathematical_foundation_and_computer_science">Mathematical Foundation And Computer Science</button>
+                    <button class="subject-button" data-subject="system_analysis_and_design">System Analysis And Design</button>
                 </div>
             </div>
         </div>
-    </sections>
+    </section>
+
+    <script>
+        $(document).ready(function () {
+            $(".subject-button").click(function () {
+                var subject = $(this).data("subject");
+                openPapersPage(subject);
+            });
+        });
+
+        function openPapersPage(subject) {
+            // Define the URL for each subject's papers page
+            var papersPageURLs = {
+                'management_information_system': 'https://libguides.cmich.edu',
+                'mobile_application_development': 'mobile_application_development_papers.html',
+                'numerical_methods': 'numerical_methods_papers.html',
+                'mathematical_foundation_and_computer_science': 'mathematical_foundation_and_computer_science_papers.html',
+                'system_analysis_and_design': 'system_analysis_and_design_papers.html'
+            };
+
+            // Get the URL for the specific subject
+            var subjectPageURL = papersPageURLs[subject];
+
+            // Open the new page in a new tab/window
+            if (subjectPageURL) {
+                window.open(subjectPageURL, '_blank');
+            } else {
+                alert('Papers page not found for this subject');
+            }
+        }
+    </script>
 </body>
 </html>
