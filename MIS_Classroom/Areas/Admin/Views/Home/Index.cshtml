@@ -50,16 +50,16 @@
         teacherTableBody.empty();
         $.each(teachers, function (index, teacher) {
             const row = `
-                            <tr>
-                                <td>${teacher.teacherId}</td>
-                                <td>${teacher.name}</td>
-                                <td>${teacher.email}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning btn-management">Edit</button>
-                                    <button class="btn btn-sm btn-danger btn-management">Delete</button>
-                                </td>
-                            </tr>
-                        `;
+                                <tr>
+                                    <td>${teacher.teacherId}</td>
+                                    <td>${teacher.name}</td>
+                                    <td>${teacher.email}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning btn-management">Edit</button>
+                                        <button class="btn btn-sm btn-danger btn-management">Delete</button>
+                                    </td>
+                                </tr>
+                            `;
             teacherTableBody.append(row);
         });
     }
@@ -70,16 +70,16 @@
         studentTableBody.empty();
         $.each(students, function (index, student) {
             const row = `
-                            <tr>
-                                <td>${student.studentId}</td>
-                                <td>${student.name}</td>
-                                <td>${student.email}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning btn-management">Edit</button>
-                                    <button class="btn btn-sm btn-danger btn-management">Delete</button>
-                                </td>
-                            </tr>
-                        `;
+                                <tr>
+                                    <td>${student.studentId}</td>
+                                    <td>${student.name}</td>
+                                    <td>${student.email}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning btn-management">Edit</button>
+                                        <button class="btn btn-sm btn-danger btn-management">Delete</button>
+                                    </td>
+                                </tr>
+                            `;
             studentTableBody.append(row);
         });
     }
@@ -90,16 +90,16 @@
         subjectTableBody.empty();
         $.each(subjects, function (index, subject) {
             const row = `
-                            <tr>
-                                    <td>${subject.subjectName}</td>
-                                    <td>${subject.subjectCode}</td>
-                          
-                                <td>
-                                    <button class="btn btn-sm btn-warning btn-management">Edit</button>
-                                    <button class="btn btn-sm btn-danger btn-management">Delete</button>
-                                </td>
-                            </tr>
-                        `;
+                                <tr>
+                                        <td>${subject.subjectName}</td>
+                                        <td>${subject.subjectCode}</td>
+
+                                    <td>
+                                        <button class="btn btn-sm btn-warning btn-management">Edit</button>
+                                        <button class="btn btn-sm btn-danger btn-management">Delete</button>
+                                    </td>
+                                </tr>
+                            `;
             subjectTableBody.append(row);
         });
     }
@@ -109,76 +109,135 @@
         const selectedOption = $(this).val();
         if (selectedOption === 'teacher') {
             $('#managementSection').html(`
-                            <h2 class="management-title">Teacher Management</h2>
-                            <button class="btn btn-primary btn-management" id="addTeacherBtn">Add Teacher</button>
-                            <table class="management-table mt-3">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="managementContent">
-                                    <!-- Teacher records will be displayed here -->
-                                </tbody>
-                            </table>
-                        `);
+                                <h2 class="management-title">Teacher Management</h2>
+                                <button class="btn btn-primary btn-management" id="addTeacherBtn">Add Teacher</button>
+                                <table class="management-table mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="managementContent">
+                                        <!-- Teacher records will be displayed here -->
+                                    </tbody>
+                                </table>
+                            `);
             renderTeachers();
         } else if (selectedOption === 'student') {
             $('#managementSection').html(`
-                            <h2 class="management-title">Student Management</h2>
-                            <button class="btn btn-primary btn-management" id="addStudentBtn">Add Student</button>
-                            <table class="management-table mt-3">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="managementContent">
-                                    <!-- Student records will be displayed here -->
-                                </tbody>
-                            </table>
-                        `);
+                                <h2 class="management-title">Student Management</h2>
+                                <button class="btn btn-primary btn-management" id="addStudentBtn">Add Student</button>
+                                <table class="management-table mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="managementContent">
+                                        <!-- Student records will be displayed here -->
+                                    </tbody>
+                                </table>
+                            `);
             renderStudents();
         } else if (selectedOption === 'subject') {
             $('#managementSection').html(`
-                            <h2 class="management-title">Subject Management</h2>
-                            <button class="btn btn-primary btn-management" id="addSubjectBtn">Add Subject</button>
-                            <table class="management-table mt-3">
-                                <thead>
-                                    <tr>
-                                        
-                                        <th>Subjects</th>
-                                        <th>Subject Code</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="managementContent">
-                                    <!-- Subject records will be displayed here -->
-                                </tbody>
-                            </table>
-                        `);
+                                <h2 class="management-title">Subject Management</h2>
+                                <button class="btn btn-primary btn-management" id="addSubjectBtn">Add Subject</button>
+                                <table class="management-table mt-3">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Subjects</th>
+                                            <th>Subject Code</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="managementContent">
+                                        <!-- Subject records will be displayed here -->
+                                    </tbody>
+                                </table>
+                            `);
             renderSubjects();
         }
     });
 
     // Event listener for Add Teacher button
     $(document).on('click', '#addTeacherBtn', function () {
-        alert('Functionality to add a teacher goes here!');
+        $('#managementSection').html(`
+                            <h2 class="management-title">Add Teacher</h2>
+                            <form id="addTeacherForm">
+                                <div class="mb-3">
+                                    <label for="teacherName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="teacherName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="teacherEmail" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="teacherEmail" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        `);
+    });
+
+
+
+    // Event listener for Add Teacher button
+    $(document).on('click', '#addTeacherBtn', function (e) {
+
+        e.preventDefault();
+        const teacherName = $('#teacherName').val();
+        const teacherEmail = $('#teacherEmail').val();
+
+        // Here you can send an AJAX request to add the teacher to the database
+        // After successful addition, you may want to refresh the teacher list
+
+        // For demo purpose, let's render the teacher list again
+        renderTeachers();
+
+
     });
 
     // Event listener for Add Student button
     $(document).on('click', '#addStudentBtn', function () {
-        alert('Functionality to add a student goes here!');
+        $('#managementSection').html(`
+                        <h2 class="management-title">Add Student</h2>
+                        <form id="addStudentForm">
+                            <div class="mb-3">
+                                <label for="studentName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="studentName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="studentEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="studentEmail" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    `);
+    });
+
+
+
+    // Event listener for Add Student button
+    $(document).on('click', '#addStudentBtn', function () {
+        e.preventDefault();
+        const studentName = $('#studentName').val();
+        const studentEmail = $('#studentEmail').val();
+        // Here you can send an AJAX request to add the student to the database
+        // After successful addition, you may want to refresh the student list
+       
+        // For demo purpose, let's render the student list again
+        renderStudents();
+
     });
 
     // Event listener for Add Subject button
     $(document).on('click', '#addSubjectBtn', function () {
-        alert('Functionality to add a subject goes here!');
+        
     });
 </script>
