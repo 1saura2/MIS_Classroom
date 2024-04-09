@@ -11,10 +11,10 @@
         <div class="col-md-3 bg-light">
             <div class="sidebar">
                 <h2 class="mt-5">Admin Dashboard</h2>
-                <select class="form-select mt-3" id="managementSelect">
-                    <option value="teacher">Teacher Management</option>
+                <select class="form-select mt-3" autofocus id="managementSelect">
+                    <option value="teacher" >Teacher Management</option>
                     <option value="student">Student Management</option>
-                    <option value="subject">Subject Management</option>
+                    <option value="subject">Questions Management</option>
                 </select>
             </div>
         </div>
@@ -54,6 +54,7 @@
                                     <td>${teacher.teacherId}</td>
                                     <td>${teacher.name}</td>
                                     <td>${teacher.email}</td>
+                                    <td>${teacher.subjectCode}</td>
                                     <td>
                                         <button class="btn btn-sm btn-warning btn-management">Edit</button>
                                         <button class="btn btn-sm btn-danger btn-management">Delete</button>
@@ -74,6 +75,7 @@
                                     <td>${student.studentId}</td>
                                     <td>${student.name}</td>
                                     <td>${student.email}</td>
+                                    <td>${student.semester}</td>
                                     <td>
                                         <button class="btn btn-sm btn-warning btn-management">Edit</button>
                                         <button class="btn btn-sm btn-danger btn-management">Delete</button>
@@ -111,12 +113,13 @@
             $('#managementSection').html(`
                                 <h2 class="management-title">Teacher Management</h2>
                                 <button class="btn btn-primary btn-management" id="addTeacherBtn">Add Teacher</button>
-                                <table class="management-table mt-3">
+                                <table class="management-table table  mt-3">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Subject Code</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -130,12 +133,13 @@
             $('#managementSection').html(`
                                 <h2 class="management-title">Student Management</h2>
                                 <button class="btn btn-primary btn-management" id="addStudentBtn">Add Student</button>
-                                <table class="management-table mt-3">
+                                <table class="management-table table mt-3">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Semester</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -180,6 +184,10 @@
                                     <label for="teacherEmail" class="form-label">Email address</label>
                                     <input type="email" class="form-control" id="teacherEmail" required>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="subjectCode" class="form-label">Subject Code</label>
+                                    <input type="text" class="form-control" id="subjectCode" required>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         `);
@@ -216,6 +224,10 @@
                                 <label for="studentEmail" class="form-label">Email address</label>
                                 <input type="email" class="form-control" id="studentEmail" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="semester" class="form-label">Semester</label>
+                                <input type="text" class="form-control" id="semester" required>
+                            </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     `);
@@ -228,10 +240,6 @@
         e.preventDefault();
         const studentName = $('#studentName').val();
         const studentEmail = $('#studentEmail').val();
-        // Here you can send an AJAX request to add the student to the database
-        // After successful addition, you may want to refresh the student list
-       
-        // For demo purpose, let's render the student list again
         renderStudents();
 
     });
