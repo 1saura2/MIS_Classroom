@@ -1,23 +1,18 @@
-﻿<body>
-    <div class="container">
-        <h1 class="mt-5">Add Questions</h1>
-        <form action="" method="post" class="mt-4">
-            <div class="mb-3">
-                <label for="subject" class="form-label">Subject:</label>
-                <select name="subject" id="subject" class="form-select">
-                    <option value="1">MIS</option>
-                    <option value="2">MAD</option>
-                    <option value="3">SAD</option>
-                    <option value="4">MFCS</option>
-                    <option value="5">NM</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="question" class="form-label">Question:</label>
-                <textarea name="question" id="question" rows="4" cols="50" class="form-control"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+﻿@model MIS_Classroom.Areas.Teacher.Models.AddQuestionViewModel
+
+<form method="post" asp-action="Index">
+    <div class="form-group">
+        <label for="SubjectId">Select Subject:</label>
+        <select class="form-control" id="SubjectId" name="SubjectId">
+            @foreach (var subject in Model.Subjects)
+            {
+                <option value="@subject.SubjectCode">@subject.SubjectName</option>
+            }
+        </select>
     </div>
-</body>
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <div class="form-group">
+        <label for="QuestionText">Question:</label>
+        <textarea class="form-control" id="QuestionText" name="QuestionText" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Question</button>
+</form>

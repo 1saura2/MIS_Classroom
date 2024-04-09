@@ -1,75 +1,29 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Questions</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />    
-    <!-- jQuery -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <h1 class="mt-5">View Questions</h1>
+﻿@model MIS_Classroom.Areas.Student.Models.ViewQuestionsViewModel
 
-        <!-- Subject Selection -->
-        <div class="mt-4">
-            <label for="subjectSelect" class="form-label">Select Subject:</label>
-            <select class="form-select mb-3" id="subjectSelect">
-                <option value="MIS">MIS</option>
-                <option value="MAD">MAD</option>
-                <option value="SAD">SAD</option>
-                <option value="MFCS">MFCS</option>
-                <option value="NM">NM</option>
-            </select>
-        </div>
-
-        <!-- Questions List -->
-        <div id="questionsList">
-            <!-- Questions will be displayed here based on selection -->
-        </div>
-    </div>
-
-    <!-- Bootstrap JS (optional) -->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            // Define an object to store questions for each subject
-            const questions = {
-                MIS: "What is Management Information System?",
-                MAD: "Define Mobile Application Development.",
-                SAD: "Explain Software Architecture Design.",
-                MFCS: "What is Mathematical Foundations of Computer Science?",
-                NM: "Define Numerical Methods."
-            };
-
-            // Function to update the displayed question based on subject selection
-            function updateQuestion() {
-                const selectedSubject = $('#subjectSelect').val();
-                const question = questions[selectedSubject];
-
-                // Clear previous content
-                $('#questionsList').empty();
-
-                // Create and append card to display the question
-                const card = $('<div class="card mb-3">' +
-                    '<div class="card-header">Question for ' + selectedSubject + '</div>' +
-                    '<div class="card-body">' +
-                    '<h5 class="card-title">Subject: ' + selectedSubject + '</h5>' +
-                    '<p class="card-text">' + question + '</p>' +
-                    '</div>' +
-                    '</div>');
-                $('#questionsList').append(card);
+<form method="post" asp-action="">
+    <div class="form-group">
+        <label for="SubjectId">Select Subject:</label>
+        <select class="form-control" id="SubjectId" name="SubjectId">
+            @foreach (var subject in Model.Subjects)
+            {
+                <option value="@subject.SubjectCode">@subject.SubjectName</option>
             }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">View Questions</button>
+</form>
 
-            // Add event listener to subject select
-            $('#subjectSelect').change(updateQuestion);
-
-            // Initial update when the page loads
-            updateQuestion();
-        });
-    </script>
-</body>
-</html>
+@if (Model.Questions != null && Model.Questions.Any())
+{
+    <h2>Questions:</h2>
+    <ul>
+        @foreach (var question in Model.Questions)
+        {
+            <li>@question.QuestionsTxt</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No questions available for the selected subject.</p>
+}

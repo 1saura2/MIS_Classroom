@@ -52,7 +52,7 @@ namespace MIS_Classroom.Models
 
             modelBuilder.Entity<TechengineeMisQuestion>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.QuestionID); // Set the primary key to QuestionID
 
                 entity.ToTable("techenginee_MIS_Question");
 
