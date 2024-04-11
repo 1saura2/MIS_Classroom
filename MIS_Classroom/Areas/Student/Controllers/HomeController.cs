@@ -25,13 +25,13 @@ namespace MIS_Classroom.Areas.Student.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string SubjectId)
+        public IActionResult Index(int SubjectCode) 
         {
             var viewModel = new ViewQuestionsViewModel
             {
                 Subjects = _context.TechengineeMisSubjects.ToList(),
                 Questions = _context.TechengineeMisQuestions
-                    .Where(q => q.SubjectCode == SubjectId)
+                    .Where(q => q.SubjectCode == SubjectCode)
                     .ToList()
             };
             return View(viewModel);

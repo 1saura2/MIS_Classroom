@@ -21,11 +21,11 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
             {
                 Subjects = _context.TechengineeMisSubjects.ToList()
             };
-            return View(viewModel); // Pass the viewModel to the view
+            return View(viewModel); 
         }
 
         [HttpPost]
-        public IActionResult Index(string subjectId, string questionText)
+        public IActionResult Index(int subjectId, string questionText) 
         {
             if (!string.IsNullOrEmpty(questionText))
             {
@@ -37,7 +37,7 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
                 _context.TechengineeMisQuestions.Add(question);
                 _context.SaveChanges();
             }
-            return RedirectToAction(nameof(Index)); // Redirect to the Index action of this controller
+            return RedirectToAction(nameof(Index)); 
         }
     }
 }

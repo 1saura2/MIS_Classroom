@@ -8,6 +8,9 @@ namespace MIS_Classroom.Models
         public int TeacherId { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
-        public string? Subjectcode { get; set; }
+        public int? SubjectCode { get; set; }
+
+        // Navigation property
+        public TechengineeMisSubject Subject { get; set; }
     }
 }
