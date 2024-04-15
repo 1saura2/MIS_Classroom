@@ -43,7 +43,7 @@ namespace MIS_Classroom.Controllers
                     switch (userType)
                     {
                         case "Admin":
-                            return RedirectToAction("ListTeacher", "Home", new { area = "Admin" });
+                            return RedirectToAction("Index", "Home", new { area = "Admin" });
                         case "Student":
                             return RedirectToAction("Index", "Home", new { area = "Student" });
                         case "Teacher":

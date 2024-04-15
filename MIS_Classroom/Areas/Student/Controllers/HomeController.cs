@@ -24,17 +24,14 @@ namespace MIS_Classroom.Areas.Student.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-        public IActionResult Index(int SubjectCode) 
+        [HttpGet]
+        public IActionResult FetchQuestions(int subjectCode)
         {
-            var viewModel = new ViewQuestionsViewModel
-            {
-                Subjects = _context.TechengineeMisSubjects.ToList(),
-                Questions = _context.TechengineeMisQuestions
-                    .Where(q => q.SubjectCode == SubjectCode)
-                    .ToList()
-            };
-            return View(viewModel);
+            var questions = _context.TechengineeMisQuestions
+                .Where(q => q.SubjectCode == subjectCode)
+                .ToList();
+
+            return PartialView("QuestionsPartial", questions);
         }
     }
 }

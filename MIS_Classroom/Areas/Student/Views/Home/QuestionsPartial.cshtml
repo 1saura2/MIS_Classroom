@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MIS_Classroom.Models.TechengineeMisQuestion>
+
+@if (Model != null && Model.Any())
+{
+    <h2>Questions:</h2>
+    <ol type="I">
+        @foreach (var question in Model)
+        {
+            <li>@question.QuestionsTxt</li>
+        }
+    </ol>
+}
+else
+{
+    <p>No questions available for the selected subject.</p>
+}
