@@ -1,4 +1,4 @@
-﻿@model MIS_Classroom.Areas.Teacher.Models.AddQuestionViewModel
+﻿@* @model MIS_Classroom.Areas.Teacher.Models.AddQuestionViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -24,3 +24,48 @@
     </div>
     <button type="submit" class="btn btn-primary">Add Question</button>
 </form>
+ *@
+ @model MIS_Classroom.Areas.Teacher.Models.AddQuestionViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<form method="post" asp-action="Index" asp-route-subjectId="@Model.SubjectId">
+    <div class="form-group">
+        <label for="SubjectId">Select Subject:</label>
+        <select class="form-control" id="SubjectId" name="SubjectId">
+            @foreach (var subject in Model.Subjects)
+            {
+                <option value="@subject.SubjectCode" @(Model.SubjectId == subject.SubjectCode ? "selected" : "")>@subject.SubjectName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="QuestionText">Question:</label>
+        <textarea class="form-control" id="QuestionText" name="QuestionText" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Question</button>
+</form>
+
+@foreach (var question in Model.Questions)
+{
+    <form method="post" asp-action="Update" class="mt-4">
+        <input type="hidden" name="id" value="@question.QuestionId" />
+        <input type="hidden" name="subjectId" value="@Model.SubjectId" />
+        <div class="form-group">
+            <textarea class="form-control" name="updatedQuestionText" rows="3">@question.QuestionsTxt</textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Update</button>
+    </form>
+
+    <form method="post" asp-action="Delete" class="mt-2">
+        <input type="hidden" name="id" value="@question.QuestionId" />
+        <input type="hidden" name="subjectId" value="@Model.SubjectId" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+}
