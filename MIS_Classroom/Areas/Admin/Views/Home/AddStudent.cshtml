@@ -1,0 +1,26 @@
+﻿
+
+@{
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="management-title">Add Student</h2>
+<form id="addStudentForm" action="/Admin/Home/AddStudent" method="post">
+    <div class="mb-3">
+        <label for="studentName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="studentName" name="Name" required>
+    </div>
+    <div class="mb-3">
+        <label for="studentEmail" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="studentEmail" name="Email" required>
+    </div>
+    <div class="mb-3">
+        <label for="semester" class="form-label">Semester</label>
+        <input type="number" class="form-control" id="semester" name="Semester" required>
+    </div>
+    <div class="mb-3">
+        <label for="studentPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="studentPassword" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,0 +1,34 @@
+﻿<!-- Views/Admin/Home/Teachers.cshtml -->
+@model IEnumerable<MIS_Classroom.Models.TechengineeMisTeacher>
+@{
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Teacher Management</h2>
+<a href="/Admin/Home/AddTeacher" class="btn btn-primary btn-management" id="addTeacherBtn">Add Teacher</a>
+<table class="management-table table mt-3">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="managementContent">
+        @foreach (var teacher in Model)
+        {
+            <tr>
+                <td>@teacher.TeacherId</td>
+                <td>@teacher.Name</td>
+                <td>@teacher.Email</td>
+                <td>@teacher.Subject.SubjectName</td>
+                <td>
+                    <a href="/Admin/Home/EditTeacher/@teacher.TeacherId" class="btn btn-sm btn-warning btn-management">Edit</a>
+                    <a href="/Admin/Home/DeleteTeacher/@teacher.TeacherId" class="btn btn-sm btn-danger btn-management">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

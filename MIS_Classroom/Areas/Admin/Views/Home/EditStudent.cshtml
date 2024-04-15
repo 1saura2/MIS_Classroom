@@ -1,0 +1,31 @@
+﻿@model MIS_Classroom.Models.TechengineeMisStudent
+@{
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="management-title">Edit Student</h2>
+<form id="editStudentForm" asp-action="EditStudent" method="post">
+    <input type="hidden" asp-for="StudentId" />
+
+    <div class="mb-3">
+        <label for="studentName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="studentName" name="Name" value="@Model.Name" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="studentEmail" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="studentEmail" name="Email" value="@Model.Email" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="semester" class="form-label">Semester</label>
+        <input type="number" class="form-control" id="semester" name="Semester" value="@Model.Semester" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="studentPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="studentPassword" name="Password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

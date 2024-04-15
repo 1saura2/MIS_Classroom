@@ -7,7 +7,7 @@ namespace MIS_Classroom.Models
     {
         public int TeacherId { get; set; }
         public string? Name { get; set; }
-        public string? Email { get; set; }
+        public string Email { get; set; } = null!;
         public int? SubjectCode { get; set; }
 
         // Navigation property

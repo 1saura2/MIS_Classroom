@@ -10,6 +10,6 @@ namespace MIS_Classroom.Models
         public string? QuestionsTxt { get; set; }
 
         // Navigation property
-        public TechengineeMisSubject Subject { get; set; }
+        public TechengineeMisSubject Subject { get; set; } 
     }
 }

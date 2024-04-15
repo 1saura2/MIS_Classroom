@@ -212,8 +212,9 @@
     });
 
     // Event listener for Add Teacher button
-    $(document).on('click', '#addTeacherBtn', function () {
-        $('#managementSection').html(`
+  
+        $(document).on('click', '#addTeacherBtn', function () {
+            $('#managementSection').html(`
                 <h2 class="management-title">Add Teacher</h2>
                 <form id="addTeacherForm">
                     <div class="mb-3">
@@ -225,27 +226,38 @@
                         <input type="email" class="form-control" id="teacherEmail" required>
                     </div>
                     <div class="mb-3">
-                        <label for="subjectCode" class="form-label">Subject Code</label>
-                        <input type="number" class="form-control" id="subjectCode" required>
+                           <label for="subjectSelect" class="form-label">Subject</label>
+    <select class="form-select" id="subjectSelect" required>
+        ${subjects.map(subject => `<option value="${subject.subjectCode}">${subject.subjectName}</option>`).join('')}
+    </select>
+
                     </div>
+ <div class="mb-3">
+        <label for="teacherPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="teacherPassword" required>
+    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             `);
-    });
+        });
+
 
     // Event listener for Add Teacher form submission
     $(document).on('submit', '#addTeacherForm', function (e) {
         e.preventDefault();
         const teacherName = $('#teacherName').val();
         const teacherEmail = $('#teacherEmail').val();
-        const subjectCode = parseInt($('#subjectCode').val()); 
+        const subjectCode = parseInt($('#subjectSelect').val());
+        const teacherPassword = $('#teacherPassword').val();
+
         $.ajax({
             url: '/Admin/Home/AddTeacher',
             method: 'POST',
             data: {
                 name: teacherName,
                 email: teacherEmail,
-                subjectCode: subjectCode
+                subjectCode: subjectCode,
+                password: teacherPassword
             },
             success: function () {
                 renderTeachers(); 
@@ -272,6 +284,11 @@
                         <label for="semester" class="form-label">Semester</label>
                         <input type="number" class="form-control" id="semester" required>
                     </div>
+
+                            <div class="mb-3">
+            <label for="studentPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="studentPassword" required>
+        </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             `);
@@ -283,13 +300,15 @@
         const studentName = $('#studentName').val();
         const studentEmail = $('#studentEmail').val();
         const semester = parseInt($('#semester').val()); 
+        const studentPassword = $('#studentPassword').val();
         $.ajax({
             url: '/Admin/Home/AddStudent',
             method: 'POST',
             data: {
                 name: studentName,
                 email: studentEmail,
-                semester: semester
+                semester: semester,
+                password: studentPassword
             },
             success: function () {
                 renderStudents();
