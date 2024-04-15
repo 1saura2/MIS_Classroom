@@ -50,22 +50,33 @@
         <textarea class="form-control" id="QuestionText" name="QuestionText" rows="3"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Add Question</button>
+    <button type="button" class="btn btn-secondary" id="updateQuestionsBtn">Update Questions</button>
 </form>
 
-@foreach (var question in Model.Questions)
-{
-    <form method="post" asp-action="Update" class="mt-4">
-        <input type="hidden" name="id" value="@question.QuestionId" />
-        <input type="hidden" name="subjectId" value="@Model.SubjectId" />
-        <div class="form-group">
-            <textarea class="form-control" name="updatedQuestionText" rows="3">@question.QuestionsTxt</textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Update</button>
-    </form>
+<div id="updateQuestionForms" style="display: none;">
+    @foreach (var question in Model.Questions)
+    {
+        <form method="post" asp-action="Update" class="mt-4">
+            <input type="hidden" name="id" value="@question.QuestionId" />
+            <input type="hidden" name="subjectId" value="@Model.SubjectId" />
+            <div class="form-group">
+                <textarea class="form-control" name="updatedQuestionText" rows="3">@question.QuestionsTxt</textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
 
-    <form method="post" asp-action="Delete" class="mt-2">
-        <input type="hidden" name="id" value="@question.QuestionId" />
-        <input type="hidden" name="subjectId" value="@Model.SubjectId" />
-        <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
-}
+        <form method="post" asp-action="Delete" class="mt-2">
+            <input type="hidden" name="id" value="@question.QuestionId" />
+            <input type="hidden" name="subjectId" value="@Model.SubjectId" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#updateQuestionsBtn").click(function () {
+            $("#updateQuestionForms").toggle();
+        });
+    });
+</script>
