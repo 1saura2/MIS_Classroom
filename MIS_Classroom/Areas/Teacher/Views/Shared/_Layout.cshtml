@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Title Here</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            padding: 20px;
+            width: 250px;
+            overflow-y: auto;
+        }
+
+            .sidebar h2 {
+                color: #ffc107;
+                margin-bottom: 20px;
+            }
+
+            .sidebar ul {
+                padding-left: 0;
+                list-style-type: none;
+            }
+
+            .sidebar li {
+                margin-bottom: 10px;
+            }
+
+            .sidebar a {
+                color: #fff;
+                text-decoration: none;
+                transition: background-color 0.3s, color 0.3s;
+                display: block;
+                padding: 10px;
+                border-radius: 5px;
+                width: 100%;
+            }
+
+                .sidebar a:hover {
+                    background-color: #ffc107;
+                    color: #343a40;
+                }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            padding-top: 20px; /* Adjust for navbar height */
+            margin-top: 20px; /* Adjust to prevent overlap with navbar */
+        }
+
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            position: fixed;
+            width: 100%;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .container {
+            margin-right: auto;
+            margin-left: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+                color: #fff;
+            }
+    </style>
+</head>
+<body>
+
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="container">
+            <h2 class="text-center">Admin Dashboard</h2>
+            <ul class="list-unstyled">
+                <li class="mb-2">
+                    <a href="#">Teacher</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#">Student</a>
+                </li>
+            </ul>
+           
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </footer>
+</body>
+</html>
