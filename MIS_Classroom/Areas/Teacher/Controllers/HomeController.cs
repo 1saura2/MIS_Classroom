@@ -42,6 +42,7 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
     }
 }
 */
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MIS_Classroom.Areas.Teacher.Models;
 using MIS_Classroom.Models;
@@ -50,6 +51,7 @@ using System.Linq;
 namespace MIS_Classroom.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
+ 
     public class HomeController : Controller
     {
         private readonly tattsContext _context;
