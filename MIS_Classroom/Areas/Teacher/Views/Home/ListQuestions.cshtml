@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MIS_Classroom.Models.TechengineeMisQuestion>
+
+@{
+    Layout = "/Areas/Teacher/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-5 mb-4">List of Questions</h1>
+
+<div class="card">
+    <div class="card-body">
+        <ol class="list-group list-group-numbered">
+            @foreach (var question in Model)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center mb-4">
+                    <div class="me-25">
+                        <!-- Increased margin -->
+                        <p class="mb-0">@question.QuestionsTxt</p>
+                    </div>
+                    <div>
+                        <a href="/Teacher/Home/EditQuestion/@question.QuestionId" class="btn btn-primary me-2">Edit</a>
+                        <a href="/Teacher/Home/DeleteQuestion/@question.QuestionId" class="btn btn-danger">Delete</a>
+                    </div>
+                </li>
+            }
+        </ol>
+    </div>
+</div>

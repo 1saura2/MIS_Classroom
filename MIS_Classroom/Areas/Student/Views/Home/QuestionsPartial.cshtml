@@ -2,15 +2,21 @@
 
 @if (Model != null && Model.Any())
 {
-    <h2>Questions:</h2>
-    <ol type="I">
-        @foreach (var question in Model)
-        {
-            <li>@question.QuestionsTxt</li>
-        }
-    </ol>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Questions:</h2>
+            <ol class="list-group list-group-numbered">
+                @foreach (var question in Model)
+                {
+                    <li class="list-group-item" style="color:black">@question.QuestionsTxt</li>
+                }
+            </ol>
+        </div>
+    </div>
 }
 else
 {
-    <p>No questions available for the selected subject.</p>
+    <div class="alert alert-warning" role="alert">
+        No questions available for the selected subject.
+    </div>
 }

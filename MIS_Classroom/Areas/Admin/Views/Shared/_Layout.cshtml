@@ -1,24 +1,29 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"]</title>
+  
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <style>
 
         .sidebar {
             background-color: #343a40;
             color: #fff;
-            position: fixed;
-            top: 0px;
+            position: absolute;
+            top: -15px;
             bottom: 0;
-            left: 0;
-          
+            left: -185px;
             padding: 20px;
             width: 250px;
             overflow-y: auto;
+            z-index: 1000;
         }
 
             .sidebar h2 {
@@ -54,6 +59,8 @@
         .main-content {
             margin-left: 270px;
             padding: 20px;
+            background-color:none;!Important
+            display:none;
         }
     </style>
 </head>
@@ -71,7 +78,7 @@
                         <a asp-area="Admin" asp-controller="Home" asp-action="ListStudent">Student</a>
                     </li>
                 </ul>
-                <a class="btn btn-danger" asp-area="Home" asp-controller="Home" asp-action="Logout">Logout</a>
+@*                 <a class="btn btn-danger" asp-area="Home" asp-controller="Home" asp-action="Logout">Logout</a> *@
             </div>
         </div>
     </header>

@@ -16,11 +16,13 @@
             background-color: #343a40;
             padding: 20px;
             height: 100vh; /* Set sidebar height to full viewport height */
-            position: fixed; /* Fix sidebar position */
-            left: 0;
-            top:57px;
-            /* Align sidebar to the left */
-            overflow-y: auto; /* Add scrollbar if content exceeds sidebar height */
+            position: absolute;
+            top: -15px;
+            bottom: 0;
+            left: -185px;
+            width: 250px;
+            overflow-y: auto;
+            z-index: 1000;
         }
 
             .sidebar h4 {

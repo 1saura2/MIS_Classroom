@@ -1,0 +1,28 @@
+﻿@model MIS_Classroom.Models.TechengineeMisTeacher
+
+@{
+    Layout = "/Areas/Teacher/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-5 mb-4">Add Question</h1>
+
+<div class="card">
+    <div class="card-body">
+        <!-- Subject Information -->
+        <div class="mb-3">
+            <h5 class="card-title">Subject Information</h5>
+            <p class="card-text">Subject Name: <span class="fw-bold">@Model.Subject.SubjectName</span></p>
+            <p class="card-text">Subject Code: <span class="fw-bold">@Model.Subject.SubjectCode</span></p>
+        </div>
+
+        <!-- Question Form -->
+        <form method="post" asp-action="AddQuestion" asp-controller="Home" enctype="multipart/form-data">
+            <input type="hidden" name="subjectCode" value="@Model.Subject.SubjectCode">
+            <div class="mb-3">
+                <label for="questionText" class="form-label fw-bold">Question Text</label>
+                <textarea class="form-control" id="questionText" name="questionsTxt" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

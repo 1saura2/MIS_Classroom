@@ -197,18 +197,8 @@ namespace MIS_Classroom.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var students = _context.TechengineeMisStudents.ToList();
-            var subjects = _context.TechengineeMisSubjects.ToList();
-            var questions = _context.TechengineeMisQuestions.ToList();
-
-            var viewModel = new AdminDashboardViewModel
-            {
-                TechengineeMisStudents = students,
-                TechengineeMisSubjects = subjects,
-                TechengineeMisQuestions = questions
-            };
-
-            return View(viewModel);
+        
+            return View();
         }
     }
 }

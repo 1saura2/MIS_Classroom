@@ -1,0 +1,21 @@
+﻿@model MIS_Classroom.Models.TechengineeMisQuestion
+
+@{
+    Layout = "/Areas/Teacher/Views/Shared/_Layout.cshtml";
+}
+<h1 class="mt-5 mb-4">Edit Question</h1>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post" asp-action="EditQuestion" asp-controller="Home">
+            <input type="hidden" name="questionId" value="@Model.QuestionId" />
+            <div class="mb-3">
+                <label for="questionText" class="form-label fw-bold">Question Text</label>
+                <textarea class="form-control" id="questionText" name="questionText" rows="6" required>@Model.QuestionsTxt</textarea>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
