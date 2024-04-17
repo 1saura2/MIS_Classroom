@@ -11,16 +11,17 @@
         <ol class="list-group list-group-numbered">
             @foreach (var question in Model)
             {
-                <li class="list-group-item d-flex justify-content-between align-items-center mb-4">
-                    <div class="me-25">
-                        <!-- Increased margin -->
-                        <p class="mb-0">@question.QuestionsTxt</p>
-                    </div>
-                    <div>
-                        <a href="/Teacher/Home/EditQuestion/@question.QuestionId" class="btn btn-primary me-2">Edit</a>
-                        <a href="/Teacher/Home/DeleteQuestion/@question.QuestionId" class="btn btn-danger">Delete</a>
-                    </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div style="border: none; margin-right: 10px;">
+                <li class="list-group-item mb-3" style="border:none !important;top:20px">
+                    <p>@(Model.ToList().IndexOf(question) + 1). @question.QuestionsTxt</p>
                 </li>
+        </div>
+        <div>
+            <a href="/Teacher/Home/EditQuestion/@question.QuestionId" class="btn btn-primary me-2">Edit</a>
+            <a href="/Teacher/Home/DeleteQuestion/@question.QuestionId" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
             }
         </ol>
     </div>

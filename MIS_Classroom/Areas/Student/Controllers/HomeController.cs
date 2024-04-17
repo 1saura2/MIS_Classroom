@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace MIS_Classroom.Areas.Student.Controllers
 {
+
     [Area("Student")]
     public class HomeController : Controller
     {
