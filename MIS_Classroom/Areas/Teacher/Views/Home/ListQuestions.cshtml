@@ -4,6 +4,8 @@
     Layout = "/Areas/Teacher/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <h1 class="mt-5 mb-4">List of Questions</h1>
 
 <div class="card">
@@ -12,17 +14,19 @@
             @foreach (var question in Model)
             {
                 <div class="d-flex justify-content-between align-items-center">
-                    <div style="border: none; margin-right: 10px;">
-                <li class="list-group-item mb-3" style="border:none !important;top:20px">
-                    <p>@(Model.ToList().IndexOf(question) + 1). @question.QuestionsTxt</p>
-                </li>
-        </div>
-        <div>
-            <a href="/Teacher/Home/EditQuestion/@question.QuestionId" class="btn btn-primary me-2">Edit</a>
-            <a href="/Teacher/Home/DeleteQuestion/@question.QuestionId" class="btn btn-danger">Delete</a>
-        </div>
-    </div>
+                    <div class="question-container" style=" width: 70%">
+                        <li class="list-group-item mb-3" style="border:none !important;top:20px">
+                            <p>@(Model.ToList().IndexOf(question) + 1). @question.QuestionsTxt</p>
+                        </li>
+                    </div>
+        <div class="button-container" style=" width: 30%">
+                        <a href="/Teacher/Home/ViewAnswer/@question.QuestionId" class="btn btn-primary me-2">Answer</a>
+                        <a href="/Teacher/Home/EditQuestion/@question.QuestionId" class="btn btn-primary me-2">Edit</a>
+                        <a href="/Teacher/Home/DeleteQuestion/@question.QuestionId" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
             }
         </ol>
     </div>
 </div>
+

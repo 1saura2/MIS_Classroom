@@ -154,6 +154,7 @@ namespace MIS_Classroom.Areas.Admin.Controllers
         {
             student.StudentId = id;
 
+
             _context.Update(student);
             _context.SaveChanges();
 
