@@ -16,6 +16,7 @@ namespace MIS_Classroom.Models
         {
         }
 
+        public virtual DbSet<TechengineeMisAnswer> TechengineeMisAnswers { get; set; } = null!;
         public virtual DbSet<TechengineeMisCredential> TechengineeMisCredentials { get; set; } = null!;
         public virtual DbSet<TechengineeMisQuestion> TechengineeMisQuestions { get; set; } = null!;
         public virtual DbSet<TechengineeMisStudent> TechengineeMisStudents { get; set; } = null!;
@@ -32,6 +33,34 @@ namespace MIS_Classroom.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TechengineeMisAnswer>(entity =>
+            {
+                entity.HasKey(e => e.AnswerId)
+                    .HasName("PK__techengi__D482502426080D21");
+
+                entity.ToTable("techenginee_MIS_Answer");
+
+                entity.Property(e => e.AnswerId).HasColumnName("AnswerID");
+
+                entity.Property(e => e.AnswerTxt).IsUnicode(false);
+
+                entity.Property(e => e.QuestionId).HasColumnName("QuestionID");
+
+                entity.Property(e => e.StudentId).HasColumnName("StudentID");
+
+                        // Configure the relationship with TechengineeMisQuestion
+        entity.HasOne(a => a.Question)
+            .WithMany()
+            .HasForeignKey(a => a.QuestionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Configure the relationship with TechengineeMisStudent
+        entity.HasOne(a => a.Student)
+            .WithMany()
+            .HasForeignKey(a => a.StudentId)
+            .OnDelete(DeleteBehavior.Cascade);
+            });
+
             modelBuilder.Entity<TechengineeMisCredential>(entity =>
             {
                 entity.HasKey(e => e.CredentialId)

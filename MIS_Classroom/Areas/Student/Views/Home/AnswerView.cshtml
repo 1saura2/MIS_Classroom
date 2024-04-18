@@ -1,0 +1,20 @@
+﻿@model MIS_Classroom.Models.TechengineeMisQuestion
+
+@{
+    Layout = "/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+
+  <h3>Provide Your Answer</h3>
+    <div class="form-group">
+        <label asp-for="QuestionText">Question:</label>
+        <p>@Model.QuestionsTxt</p>
+    </div>
+    <form asp-action="SubmitAnswer" asp-controller="Home" asp-area="Student" method="post">
+        <div class="form-group">
+            <label asp-for="AnswerText">Your Answer:</label>
+            <textarea class="form-control" asp-for="AnswerText" rows="3"></textarea>
+        </div>
+        <input type="hidden" asp-for="QuestionId" value="@Model.QuestionId" />
+        <button type="submit" class="btn btn-primary">Submit Answer</button>
+    </form>
+
