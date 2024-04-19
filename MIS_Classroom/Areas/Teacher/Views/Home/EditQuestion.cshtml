@@ -8,6 +8,11 @@
 <div class="card">
     <div class="card-body">
         <form method="post" asp-action="EditQuestion" asp-controller="Home">
+            <div class="mb-3">
+                <h5 class="card-title">Subject Information</h5>
+                <p class="card-text">Subject Name: <span class="fw-bold">mIs</span></p>
+                <p class="card-text">Subject Code: <span class="fw-bold">3</span></p>
+            </div>
             <input type="hidden" name="questionId" value="@Model.QuestionId" />
             <div class="mb-3">
                 <label for="questionText" class="form-label fw-bold">Question Text</label>

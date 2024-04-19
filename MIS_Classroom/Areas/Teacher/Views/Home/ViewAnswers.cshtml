@@ -16,6 +16,7 @@
         <h2 class="mt-4">Question</h2>
         <div class="card mt-4">
             <div class="card-body">
+                <h6 class="card-title mb-2 text-muted"> <b>Subjct Name:</b> hello</h6>
                 <h5 class="card-title">@ViewBag.Question.QuestionsTxt</h5>
             </div>
         </div>
@@ -23,25 +24,16 @@
         <h2 class="mt-4">Answers</h2>
         @if (Model.Any())
         {
-            <table class="table mt-4">
-                <thead>
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Student Email</th>
-                        <th>Answer</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var answer in Model)
-                    {
-                        <tr>
-                            <td>@answer.Student.Name</td>
-                            <td>@answer.Student.Email</td>
-                            <td>@answer.AnswerTxt</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+            @foreach (var answer in Model)
+            {
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Student Email: @answer.Student.Email</h5>
+                        <h6 class="card-title mb-2 text-muted"> <b>Student Name:</b> @answer.Student.Name</h6>
+                        <p class="card-text"> <b>Answer:</b> @answer.AnswerTxt</p>
+                    </div>
+                </div>
+            }
         }
         else
         {

@@ -13,10 +13,21 @@
             <ol class="list-group list-group-numbered">
                 @foreach (var question in Model)
                 {
-                    <li class="list-group-item" style="color:black">
-                        @question.QuestionsTxt
-                        <a href="@Url.Action("AnswerView", "Home", new { questionId = question.QuestionId })" class="btn btn-primary">Answer</a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div style="width:80%">
+                    <li class="list-group-item mb-3" style="border:none !important;top:20px">
+                        <p>@(Model.ToList().IndexOf(question) + 1). @question.QuestionsTxt</p>
                     </li>
+                     </div>
+                      
+                        <div style="width:20%">
+                            <a href="@Url.Action("AnswerView", "Home", new { questionId = question.QuestionId })" class="btn btn-primary">Answer</a>
+            </div>
+                        
+                        </div>
+                   
+                  
+                   
                 }
             </ol>
         </div>
