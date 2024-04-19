@@ -26,9 +26,47 @@
                 <td>@student.Semester</td>
                 <td>
                     <a href="/Admin/Home/EditStudent/@student.StudentId" class="btn btn-sm btn-warning btn-management">Edit</a>
-                    <a href="/Admin/Home/DeleteStudent/@student.StudentId" class="btn btn-sm btn-danger btn-management">Delete</a>
+                    <button type="button" class="btn btn-sm btn-danger btn-management delete-button" data-student-id="@student.StudentId" data-student-email="@student.Email">Delete</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+<div class="modal fade" id="deleteStudentModal" tabindex="-1" aria-labelledby="deleteStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteStudentModalLabel">Delete Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="deleteStudentForm" method="post" action="/Admin/Home/DeleteStudent">
+                    <input type="hidden" name="id" id="deleteStudentId" />
+                    <p>Are you sure you want to delete the following student?</p>
+                    <p><strong>ID:</strong> <span id="deleteStudentIdSpan"></span></p>
+                    <p><strong>Email:</strong> <span id="deleteStudentEmailSpan"></span></p>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.delete-button').click(function () {
+                var studentId = $(this).data('student-id');
+                var studentEmail = $(this).data('student-email');
+
+                $('#deleteStudentId').val(studentId);
+                $('#deleteStudentIdSpan').text(studentId);
+                $('#deleteStudentEmailSpan').text(studentEmail);
+
+                $('#deleteStudentModal').modal('show');
+            });
+        });
+    </script>
+}

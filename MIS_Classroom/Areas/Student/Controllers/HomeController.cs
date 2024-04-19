@@ -16,17 +16,14 @@ namespace MIS_Classroom.Areas.Student.Controllers
             _context = context;
         }
 
-        private int? GetStudentIdFromSession()
+        private int GetStudentIdFromSession()
         {
             var email = HttpContext.Session.GetString("Email");
-            if (string.IsNullOrEmpty(email))
-            {
-                return null;
-            }
-
+           
             var student = _context.TechengineeMisStudents.FirstOrDefault(s => s.Email == email);
-            return student?.StudentId ?? default(int);
+            return student.StudentId; 
         }
+
 
 
         public IActionResult Index()
@@ -41,24 +38,35 @@ namespace MIS_Classroom.Areas.Student.Controllers
 
         public IActionResult FetchQuestions(int subjectCode)
         {
-            var studentId = GetStudentIdFromSession();
-            var questions = _context.TechengineeMisQuestions
-                .Where(q => q.SubjectCode == subjectCode)
-                .ToList();
+            var questions = _context.TechengineeMisQuestions.Where(q => q.SubjectCode == subjectCode).ToList();
+
             return View(questions);
         }
 
+
+
+
         public IActionResult AnswerView(int questionId)
         {
-            var studentId = GetStudentIdFromSession();
+            int studentId = GetStudentIdFromSession();
 
+            var answer = _context.TechengineeMisAnswers
+                .FirstOrDefault(a => a.StudentId == studentId && a.QuestionId == questionId);
 
+            var question = _context.TechengineeMisQuestions
+                .FirstOrDefault(q => q.QuestionId == questionId);
 
-            var question = _context.TechengineeMisQuestions.FirstOrDefault(q => q.QuestionId == questionId);
-;
-
-            return View(question);
+            if (answer != null)
+            {
+                ViewBag.Answer = answer;
+                return View("AlreadyAnsweredView", question);
+            }
+            else
+            {
+                return View("ProvideAnswerView", question);
+            }
         }
+
 
 
 
@@ -67,14 +75,14 @@ namespace MIS_Classroom.Areas.Student.Controllers
         public IActionResult SubmitAnswer(TechengineeMisAnswer answer)
         {
 
-            var studentId = GetStudentIdFromSession();
+            int studentId = GetStudentIdFromSession();
 
-            answer.StudentId = studentId.Value;
+            answer.StudentId = studentId;
 
             _context.TechengineeMisAnswers.Add(answer);
             _context.SaveChanges();
 
-            return RedirectToAction(nameof(FetchQuestions));
+            return RedirectToAction(nameof(Index));
         }
 
 

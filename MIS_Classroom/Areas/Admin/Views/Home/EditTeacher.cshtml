@@ -3,18 +3,17 @@
     Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="management-title">Edit Teacher</h2>
+<h2 class="management-title mb-3">Edit Teacher</h2>
+<div class="mb-3">
+    <label for="teacherEmail" class="form-label"><b>Edit profile of User:</b> <i>@Model.Email</i></label>
+</div>
 <form id="editTeacherForm" asp-action="EditTeacher" method="post">
     <input type="hidden" asp-for="TeacherId" />
+    <input type="hidden" asp-for="Email" />
 
     <div class="mb-3">
         <label for="teacherName" class="form-label">Name</label>
         <input type="text" class="form-control" id="teacherName" name="Name" value="@Model.Name" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="teacherEmail" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="teacherEmail" name="Email" value="@Model.Email" readonly>
     </div>
 
     <div class="mb-3">

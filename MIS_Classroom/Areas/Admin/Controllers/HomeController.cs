@@ -94,7 +94,7 @@ namespace MIS_Classroom.Areas.Admin.Controllers
         }
 
         [HttpPost, ActionName("DeleteTeacher")]
-        public IActionResult DeleteTeacherConfirm(int? id)
+        public IActionResult DeleteTeacherConfirm(int id)
         {
             var teacher = _context.TechengineeMisTeachers.FirstOrDefault(t => t.TeacherId == id);
             var credential = _context.TechengineeMisCredentials.FirstOrDefault(c => c.Email == teacher.Email);
@@ -179,7 +179,7 @@ namespace MIS_Classroom.Areas.Admin.Controllers
         }
 
         [HttpPost, ActionName("DeleteStudent")]
-        public IActionResult DeleteStudentConfirm(int? id)
+        public IActionResult DeleteStudentConfirm(int id)
         {
             var student = _context.TechengineeMisStudents.FirstOrDefault(s => s.StudentId == id);
             var credential = _context.TechengineeMisCredentials.FirstOrDefault(c => c.Email == student.Email);
