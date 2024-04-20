@@ -48,18 +48,19 @@ namespace MIS_Classroom.Models
 
                 entity.Property(e => e.StudentId).HasColumnName("StudentID");
 
-                        // Configure the relationship with TechengineeMisQuestion
-        entity.HasOne(a => a.Question)
-            .WithMany()
-            .HasForeignKey(a => a.QuestionId)
-            .OnDelete(DeleteBehavior.Cascade);
+                // Configure the relationship with TechengineeMisQuestion
+                entity.HasOne(a => a.Question)
+                    .WithMany()
+                    .HasForeignKey(a => a.QuestionId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
-        // Configure the relationship with TechengineeMisStudent
-        entity.HasOne(a => a.Student)
-            .WithMany()
-            .HasForeignKey(a => a.StudentId)
-            .OnDelete(DeleteBehavior.Cascade);
-            });
+                // Configure the relationship with TechengineeMisStudent
+                entity.HasOne(a => a.Student)
+                    .WithMany()
+                    .HasForeignKey(a => a.StudentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            
+        });
 
             modelBuilder.Entity<TechengineeMisCredential>(entity =>
             {

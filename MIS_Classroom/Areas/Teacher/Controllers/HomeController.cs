@@ -26,25 +26,27 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
         public IActionResult ListQuestions()
         {
             var email = HttpContext.Session.GetString("Email");
-
-            var teacher = _context.TechengineeMisTeachers
-                            .FirstOrDefault(t => t.Email == email);
+            var teacher = _context.TechengineeMisTeachers.FirstOrDefault(t => t.Email == email);
 
             if (teacher != null)
             {
                 var subjectCode = teacher.SubjectCode;
-
                 var questions = _context.TechengineeMisQuestions
-                                    .Where(q => q.SubjectCode == subjectCode)
-                                    .ToList();
+                    .Where(q => q.SubjectCode == subjectCode)
+                    .OrderBy(q => q.SubjectCode)
+                    .ThenBy(q => q.Position)
+                    .ToList();
+
+                _context.SaveChanges();
 
                 return View(questions);
             }
             else
             {
-                return RedirectToAction("Login"); 
+                return RedirectToAction("Login");
             }
         }
+
 
         public IActionResult AddQuestion()
         {
@@ -75,7 +77,7 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
 
         public IActionResult EditQuestion(int id)
         {
-            var question = _context.TechengineeMisQuestions.FirstOrDefault(q => q.QuestionId == id);
+            var question = _context.TechengineeMisQuestions.Include(q=>q.Subject).FirstOrDefault(q => q.QuestionId == id);
    
             return View(question);
         }
@@ -111,7 +113,7 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
 
         public IActionResult ViewAnswers(int id)
         {
-            var question = _context.TechengineeMisQuestions.FirstOrDefault(q => q.QuestionId == id);
+            var question = _context.TechengineeMisQuestions.Include(q=>q.Subject).FirstOrDefault(q => q.QuestionId == id);
             var answers = _context.TechengineeMisAnswers
                         .Include(a => a.Student)
                         .Where(a => a.QuestionId == id)
@@ -120,6 +122,31 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
 
             return View(answers);
         }
+
+        [HttpPost]
+        public IActionResult UpdatePositions(List<int> questionIds, int subjectCode)
+        {
+            var questions = _context.TechengineeMisQuestions
+                .Where(q => q.SubjectCode == subjectCode)
+                .OrderBy(q => q.Position)
+                .ToList();
+
+            for (int i = 0; i < questionIds.Count; i++)
+            {
+                var questionId = questionIds[i];
+                var question = questions.FirstOrDefault(q => q.QuestionId == questionId);
+                if (question != null)
+                {
+                    question.Position = i + 1;
+                }
+            }
+
+            _context.SaveChanges();
+
+            return Ok();
+           /* return RedirectToAction("ListQuestions");*/
+        }
+
 
 
     }

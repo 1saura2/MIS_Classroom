@@ -38,10 +38,14 @@ namespace MIS_Classroom.Areas.Student.Controllers
 
         public IActionResult FetchQuestions(int subjectCode)
         {
-            var questions = _context.TechengineeMisQuestions.Where(q => q.SubjectCode == subjectCode).ToList();
+            var questions = _context.TechengineeMisQuestions
+                                .Where(q => q.SubjectCode == subjectCode)
+                                .OrderBy(q => q.Position)
+                                .ToList();
 
             return View(questions);
         }
+
 
 
 

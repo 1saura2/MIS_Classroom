@@ -8,26 +8,29 @@
 
 <div class="card">
     <div class="card-body">
-        <ol class="list-group list-group-numbered">
-            @foreach (var question in Model)
-            {
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="question-container" style="width: 65% ;text-align:justify">
-                        <li class="list-group-item mb-3" style="border:none !important;top:20px">
-                            <p>@(Model.ToList().IndexOf(question) + 1). @question.QuestionsTxt</p>
-                        </li>
-                    </div>
-                    <div class="button-container" style="width: 30%">
-                        <a href="/Teacher/Home/ViewAnswers/@question.QuestionId" class="btn btn-primary me-2">View Answers</a>
-                        <a href="/Teacher/Home/EditQuestion/@question.QuestionId" class="btn btn-primary me-2">Edit</a>
-                        <button type="button" class="btn btn-danger delete-button" data-question-id="@question.QuestionId" data-question-text="@question.QuestionsTxt">Delete</button>
-                    </div>
-                </div>
-            }
-        </ol>
+        <form id="subjectForm">
+
+            <ol class="list-group list-unstyled" id="sortable">
+                @foreach (var question in Model)
+                {
+                    <li class="list-group-item mb-3" data-question-id="@question.QuestionId">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="question-container" style="width: 65%; text-align: justify">
+                                <p>@question.Position. @question.QuestionsTxt</p>
+                            </div>
+                            <div class="button-container" style="width: 30%">
+                                <input type="hidden" id="subjectCode" name="subjectCode" value="@question.SubjectCode">
+                                <a href="/Teacher/Home/ViewAnswers/@question.QuestionId" class="btn btn-primary me-2">View Answers</a>
+                                <a href="/Teacher/Home/EditQuestion/@question.QuestionId" class="btn btn-primary me-2">Edit</a>
+                                <button type="button" class="btn btn-danger delete-button" data-question-id="@question.QuestionId" data-question-text="@question.QuestionsTxt">Delete</button>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ol>
+        </form>
     </div>
 </div>
-
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -48,7 +51,6 @@
     </div>
 </div>
 
-
 @section Scripts {
     <script>
         $(document).ready(function () {
@@ -63,5 +65,33 @@
             });
         });
     </script>
-}
 
+    <script>
+        $(document).ready(function () {
+            $("#sortable").sortable({
+                axis: "y",
+                update: function (event, ui) {
+                    var questionIds = $("#sortable li").map(function () {
+                        return $(this).data("question-id");
+                    }).get();
+
+                    $.ajax({
+                        url: "/Teacher/Home/UpdatePositions",
+                        method: "POST",
+                        data: { questionIds: questionIds, subjectCode: $("#subjectCode").val() },
+                        success: function (response) {
+                            
+                            location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                          
+                            console.error("An error occurred while updating positions: " + error);
+                        }
+                    });
+
+                }
+            });
+        });
+
+    </script>
+}

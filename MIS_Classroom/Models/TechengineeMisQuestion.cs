@@ -8,6 +8,7 @@ namespace MIS_Classroom.Models
         public int QuestionId { get; set; }
         public int? SubjectCode { get; set; }
         public string? QuestionsTxt { get; set; }
+        public int? Position { get; set; }
 
         // Navigation property
         public TechengineeMisSubject Subject { get; set; }
