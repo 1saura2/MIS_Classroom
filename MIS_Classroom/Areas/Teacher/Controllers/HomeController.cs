@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MIS_Classroom.Areas.Teacher.Models;
 using MIS_Classroom.Models;
 using System.Linq;
+using System.Net;
 
 namespace MIS_Classroom.Areas.Teacher.Controllers
 {
@@ -144,8 +145,35 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
             _context.SaveChanges();
 
             return Ok();
-           /* return RedirectToAction("ListQuestions");*/
+           
         }
+
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ChangePassword(string password) {
+            var email = HttpContext.Session.GetString("Email");
+            var credential = _context.TechengineeMisCredentials.FirstOrDefault(t => t.Email == email);
+
+            credential.Password = password;
+            _context.Update(credential);
+            _context.SaveChanges();
+
+            return RedirectToAction("ChangePassword");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteAnswer(int answerId, int id)
+        {
+            var answer = _context.TechengineeMisAnswers.FirstOrDefault(a=>a.AnswerId == answerId);
+            _context.Remove(answer);
+            _context.SaveChanges();
+            return RedirectToAction("ViewAnswers", new { id });
+        }
+
 
 
 

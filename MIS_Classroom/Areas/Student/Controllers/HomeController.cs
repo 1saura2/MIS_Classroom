@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using MIS_Classroom.Models;
 using System.Linq;
 using MIS_Classroom.Areas.Student.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace MIS_Classroom.Areas.Student.Controllers
 {
@@ -87,6 +88,25 @@ namespace MIS_Classroom.Areas.Student.Controllers
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+
+
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ChangePassword(string password)
+        {
+            var email = HttpContext.Session.GetString("Email");
+            var credential = _context.TechengineeMisCredentials.FirstOrDefault(t => t.Email == email);
+
+            credential.Password = password;
+            _context.Update(credential);
+            _context.SaveChanges();
+
+            return RedirectToAction("ChangePassword");
         }
 
 

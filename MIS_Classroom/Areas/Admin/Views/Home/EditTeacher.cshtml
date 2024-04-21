@@ -1,22 +1,18 @@
-﻿#EditTeacher.cshtml:
-
-@model MIS_Classroom.Models.TechengineeMisTeacher
+﻿@model MIS_Classroom.Models.TechengineeMisTeacher
 @{
     Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <h2 class="management-title">Edit Teacher</h2>
+<div class="mb-3">
+    <label for="studentEmail" class="form-label"><b>Edit profile of User:</b> <i>@Model.Email</i></label>
+</div>
 <form id="editTeacherForm" asp-action="EditTeacher" method="post">
-    <input type="hidden" asp-for="TeacherId" />
+    <input type="hidden" id="teacherEmail" name="Email" value="@Model.Email" required>
 
     <div class="mb-3">
         <label for="teacherName" class="form-label">Name</label>
         <input type="text" class="form-control" id="teacherName" name="Name" value="@Model.Name" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="teacherEmail" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="teacherEmail" name="Email" value="@Model.Email" required>
     </div>
 
     <div class="mb-3">
@@ -29,10 +25,7 @@
         </select>
     </div>
 
-    <div class="mb-3">
-        <label for="teacherPassword" class="form-label">Password</label>
-        <input type="password" class="form-control" id="teacherPassword" name="Password">
-    </div>
-
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<a href="/Admin/Home/ResetTeacherPassword/?email=@Model.Email" class="btn btn-warning mt-3">Reset Password</a>

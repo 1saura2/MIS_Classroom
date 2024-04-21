@@ -32,6 +32,11 @@
                         <h5 class="card-title">Student Email: @answer.Student.Email</h5>
                         <h6 class="card-title mb-2 text-muted"> <b>Student Name:</b> @answer.Student.Name</h6>
                         <p class="card-text"> <b>Answer:</b> @answer.AnswerTxt</p>
+                        <form method="post" action="/Teacher/Home/DeleteAnswer">
+                            <input type="hidden" name="answerId" value="@answer.AnswerId" />
+                            <input type="hidden" name="id" value="@ViewBag.Question.QuestionId" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
             }
