@@ -70,11 +70,28 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
         [HttpPost]
         public IActionResult AddQuestion(TechengineeMisQuestion question)
         {
+            
+            var existingQuestion = _context.TechengineeMisQuestions
+                .FirstOrDefault(q => q.QuestionsTxt == question.QuestionsTxt && q.SubjectCode == question.SubjectCode);
+
+            if (existingQuestion != null)
+            {
+                ViewBag.ErrorMessage = "The same question already exists for this subject.";
+
+                var teacherEmail = HttpContext.Session.GetString("Email");
+                var teacher = _context.TechengineeMisTeachers
+                    .Include(t => t.Subject)
+                    .FirstOrDefault(t => t.Email == teacherEmail);
+
+                return View(teacher);
+            }
+
             _context.TechengineeMisQuestions.Add(question);
             _context.SaveChanges();
 
-            return RedirectToAction("AddQuestion", "Home"); 
+            return RedirectToAction("AddQuestion", "Home");
         }
+
 
         public IActionResult EditQuestion(int id)
         {
@@ -154,13 +171,35 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
         }
 
         [HttpPost]
-        public IActionResult ChangePassword(string password) {
+        public IActionResult ChangePassword(string currentPassword, string newPassword, string confirmPassword)
+        {
             var email = HttpContext.Session.GetString("Email");
             var credential = _context.TechengineeMisCredentials.FirstOrDefault(t => t.Email == email);
 
-            credential.Password = password;
+            if (credential == null)
+            {
+                return NotFound();
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(currentPassword, credential.Password))
+            {
+                ViewBag.ErrorMessage = "The current password is incorrect.";
+                return View();
+            }
+
+            if (newPassword != confirmPassword)
+            {
+                ViewBag.ErrorMessage = "New password and Confirm password do not match.";
+                return View();
+            }
+
+            string hashedNewPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+            credential.Password = hashedNewPassword;
             _context.Update(credential);
             _context.SaveChanges();
+
+            TempData["SuccessMessage"] = "Password changed successfully.";
 
             return RedirectToAction("ChangePassword");
         }

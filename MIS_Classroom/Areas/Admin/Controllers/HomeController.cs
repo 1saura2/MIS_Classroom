@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MIS_Classroom.Areas.Admin.Models;
 using MIS_Classroom.Models;
+using NuGet.DependencyResolver;
 
 namespace MIS_Classroom.Areas.Admin.Controllers
 {
@@ -33,6 +34,12 @@ namespace MIS_Classroom.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddTeacher(TechengineeMisTeacher teacher, string password)
         {
+            if (_context.TechengineeMisCredentials.Any(c => c.Email == teacher.Email))
+            {
+                ViewBag.Message = "Email address is already in use!";
+                var subjects = _context.TechengineeMisSubjects.ToList();
+                return View("AddTeacher", subjects);
+            }
             _context.TechengineeMisTeachers.Add(teacher);
             _context.SaveChanges();
 
@@ -40,10 +47,12 @@ namespace MIS_Classroom.Areas.Admin.Controllers
 
             var userType = _context.TechengineeMisUserTypes.FirstOrDefault(u => u.UserType.ToLower() == "teacher")?.TypeId;
 
+            string hashedPassword = HashPassword(password);
+
             var credential = new TechengineeMisCredential
             {
                 Email = teacher.Email,
-                Password = password,
+                Password = hashedPassword,
                 UserType = userType
             };
 
@@ -123,6 +132,12 @@ namespace MIS_Classroom.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddStudent(TechengineeMisStudent student, string password)
         {
+            if (_context.TechengineeMisCredentials.Any(c => c.Email == student.Email))
+            {
+                ViewBag.Message = "Email address is already in use!";
+                var subjects = _context.TechengineeMisSubjects.ToList();
+                return View("AddStudent");
+            }
             _context.TechengineeMisStudents.Add(student);
             _context.SaveChanges();
 
@@ -130,10 +145,12 @@ namespace MIS_Classroom.Areas.Admin.Controllers
 
             var userType = _context.TechengineeMisUserTypes.FirstOrDefault(u => u.UserType.ToLower() == "student")?.TypeId;
 
+            string hashedPassword = HashPassword(password);
+
             var credential = new TechengineeMisCredential
             {
                 Email = student.Email,
-                Password = password,
+                Password = hashedPassword,
                 UserType = userType
             };
 
@@ -221,7 +238,10 @@ namespace MIS_Classroom.Areas.Admin.Controllers
         }
 
 
-
+        private string HashPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
+        }
 
 
 

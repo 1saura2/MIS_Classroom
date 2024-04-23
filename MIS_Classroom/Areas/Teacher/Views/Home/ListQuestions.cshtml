@@ -9,13 +9,16 @@
 <div class="card">
     <div class="card-body">
         <form id="subjectForm">
-
             <ol class="list-group list-unstyled" id="sortable">
                 @foreach (var question in Model)
                 {
                     <li class="list-group-item mb-3" data-question-id="@question.QuestionId">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="question-container" style="width: 65%; text-align: justify">
+                            <!-- Drag icon -->
+                            <div class="drag-icon" style="cursor: grab;">
+                                <img src="~/Dragicon.png" alt="Drag Icon" style="height: 20px; width: 20px;" />
+                            </div>
+                            <div class="question-container" style="width: 60%; text-align: justify">
                                 <p>@question.Position. @question.QuestionsTxt</p>
                             </div>
                             <div class="button-container" style="width: 30%">
@@ -70,6 +73,7 @@
         $(document).ready(function () {
             $("#sortable").sortable({
                 axis: "y",
+                handle: ".drag-icon",
                 update: function (event, ui) {
                     var questionIds = $("#sortable li").map(function () {
                         return $(this).data("question-id");
@@ -80,18 +84,14 @@
                         method: "POST",
                         data: { questionIds: questionIds, subjectCode: $("#subjectCode").val() },
                         success: function (response) {
-                            
                             location.reload();
                         },
                         error: function (xhr, status, error) {
-                          
                             console.error("An error occurred while updating positions: " + error);
                         }
                     });
-
                 }
             });
         });
-
     </script>
 }

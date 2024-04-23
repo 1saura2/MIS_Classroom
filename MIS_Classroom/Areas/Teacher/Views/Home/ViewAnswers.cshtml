@@ -17,7 +17,6 @@
         <div class="card mt-4">
             <div class="card-body">
                 <h6 class="card-title mb-2 text-muted"><b>Subject Name:</b> @ViewBag.Question.Subject.SubjectName</h6>
-
                 <h5 class="card-title">@ViewBag.Question.QuestionsTxt</h5>
             </div>
         </div>
@@ -32,11 +31,34 @@
                         <h5 class="card-title">Student Email: @answer.Student.Email</h5>
                         <h6 class="card-title mb-2 text-muted"> <b>Student Name:</b> @answer.Student.Name</h6>
                         <p class="card-text"> <b>Answer:</b> @answer.AnswerTxt</p>
-                        <form method="post" action="/Teacher/Home/DeleteAnswer">
-                            <input type="hidden" name="answerId" value="@answer.AnswerId" />
-                            <input type="hidden" name="id" value="@ViewBag.Question.QuestionId" />
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal_@answer.AnswerId">
+                            Delete
+                        </button>
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="deleteModal_@answer.AnswerId" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete Answer</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete this answer?</p>
+                                        <hr>
+                                        <p><strong>Answer:</strong>@answer.AnswerTxt</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <form method="post" action="/Teacher/Home/DeleteAnswer">
+                                            <input type="hidden" name="answerId" value="@answer.AnswerId" />
+                                            <input type="hidden" name="id" value="@ViewBag.Question.QuestionId" />
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             }

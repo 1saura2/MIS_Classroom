@@ -5,6 +5,12 @@
 }
 
 <h2 class="management-title">Add Student</h2>
+@{
+    if (ViewBag.Message != null)
+    {
+        <p style="color:red">@ViewBag.Message</p>
+    }
+}
 <form id="addStudentForm" action="/Admin/Home/AddStudent" method="post">
     <div class="mb-3">
         <label for="studentName" class="form-label">Name</label>

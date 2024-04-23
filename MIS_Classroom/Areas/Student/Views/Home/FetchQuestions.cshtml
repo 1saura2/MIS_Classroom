@@ -9,7 +9,13 @@
 {
     <div class="card">
         <div class="card-body">
-            <h2 class="card-title mb-4">Questions:</h2>
+            <h2 class="card-title mb-4">Questions for : <span class="fw-bold">@Model.FirstOrDefault()?.Subject.SubjectName</span></h2>
+            @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+            {
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.SuccessMessage
+                </div>
+            }
             <ol class="list-group list-unstyled">
                 @foreach (var question in Model)
                 {
