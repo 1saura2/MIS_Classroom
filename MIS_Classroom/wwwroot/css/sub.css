@@ -5,56 +5,61 @@
     float: right;
 }
 
+
 .main-content {
     color: #09206F;
     padding: 20px;
-
-  
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin-left: 220px;
+    padding-top: 100px;
+    z-index: 999;
 }
 
-/*.subject-view {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    overflow: hidden;
-    margin-top: 20px;
-    background-color: floralwhite;
-    width: 350px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
+/*teacher admin and student layout page*/
+
+
+
+.sidebar {
+    background-color: #343a40;
+    color: #fff;
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    left: 0px;
+    padding: 20px;
+    width: 250px;
+    overflow-y: auto;
+    z-index: 1000;
 }
 
-.tab {
-    display: flex;
-    flex-direction: column;
-    align-items: center;*/ /* Center horizontally */
-    /*justify-content: center;*/ /* Center vertically */
-/*}
 
-    .tab button {
-        background-color: #337ab7;
-        color: #F0F3F8;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 20px 30px;
-        transition: background-color 0.3s, color 0.3s, transform 0.2s ease-in-out;
-        font-size: 16px;
-        margin: 10px 0;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        width: 300px;*/ /* Set a fixed width */
-    /*}
+    .sidebar h2 {
+        color: #ffc107;
+        margin-bottom: 20px;
+    }
 
-        .tab button:hover {
-            background-color: #09206F;
-            color: #fff;
+    .sidebar ul {
+        padding-left: 0;
+        list-style-type: none;
+    }
+
+    .sidebar li {
+        margin-bottom: 10px;
+    }
+
+    .sidebar a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .sidebar a:hover {
+            background-color: #ffc107;
+            color: #343a40;
         }
-
-        .tab button:active {
-            transform: scale(0.95);
-        }*/
