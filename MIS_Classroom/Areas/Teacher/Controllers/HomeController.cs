@@ -69,10 +69,34 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
             return View(teacher);
         }
 
+        /*        [HttpPost]
+                      public IActionResult AddQuestion(TechengineeMisQuestion question)
+                      {
+
+                          var existingQuestion = _context.TechengineeMisQuestions
+                              .FirstOrDefault(q => q.QuestionsTxt == question.QuestionsTxt && q.SubjectCode == question.SubjectCode);
+
+                          if (existingQuestion != null)
+                          {
+                              ViewBag.ErrorMessage = "The same question already exists for this subject.";
+
+                              var teacherEmail = HttpContext.Session.GetString("Email");
+                              var teacher = _context.TechengineeMisTeachers
+                                  .Include(t => t.Subject)
+                                  .FirstOrDefault(t => t.Email == teacherEmail);
+
+                              return View(teacher);
+                          }
+
+                          _context.TechengineeMisQuestions.Add(question);
+                          _context.SaveChanges();
+
+                          return RedirectToAction("AddQuestion", "Home");
+                      }*/
+
         [HttpPost]
         public IActionResult AddQuestion(TechengineeMisQuestion question)
         {
-            
             var existingQuestion = _context.TechengineeMisQuestions
                 .FirstOrDefault(q => q.QuestionsTxt == question.QuestionsTxt && q.SubjectCode == question.SubjectCode);
 
@@ -88,9 +112,15 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
                 return View(teacher);
             }
 
+            var maxPosition = _context.TechengineeMisQuestions
+                .Where(q => q.SubjectCode == question.SubjectCode)
+                .Max(q => (int?)q.Position) ?? 0;
+
+            question.Position = maxPosition + 1;
+
             _context.TechengineeMisQuestions.Add(question);
             _context.SaveChanges();
-            
+
 
             return RedirectToAction("AddQuestion", "Home");
         }

@@ -209,16 +209,18 @@ namespace MIS_Classroom.Areas.Admin.Controllers
             return RedirectToAction(nameof(ListStudent));
         }
 
-       
+
         public IActionResult ResetStudentPassword(string email)
         {
             var credential = _context.TechengineeMisCredentials.FirstOrDefault(c => c.Email == email);
 
-                const string newPassword = "123";
+            const string newPassword = "123";
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
 
-                credential.Password = newPassword;
-                _context.Update(credential);
-                _context.SaveChanges();
+
+            credential.Password = hashedPassword;
+            _context.Update(credential);
+            _context.SaveChanges();
 
             return RedirectToAction(nameof(ListStudent));
         }
@@ -227,11 +229,15 @@ namespace MIS_Classroom.Areas.Admin.Controllers
         {
             var credential = _context.TechengineeMisCredentials.FirstOrDefault(c => c.Email == email);
 
-                const string newPassword = "123";
 
-                credential.Password = newPassword;
-                _context.Update(credential);
-                _context.SaveChanges();
+
+            const string newPassword = "123";
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+
+            credential.Password = hashedPassword;
+            _context.Update(credential);
+            _context.SaveChanges();
 
 
             return RedirectToAction(nameof(ListTeacher));
