@@ -39,6 +39,8 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
                     .ToList();
 
                 _context.SaveChanges();
+              
+                ViewBag.SuccessMessage = TempData["SuccessMessage"];
 
                 return View(questions);
             }
@@ -88,6 +90,7 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
 
             _context.TechengineeMisQuestions.Add(question);
             _context.SaveChanges();
+            
 
             return RedirectToAction("AddQuestion", "Home");
         }
@@ -107,6 +110,8 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
  
             question.QuestionsTxt = questionText;
             _context.SaveChanges();
+
+            TempData["SuccessMessage"] = "Question Updated Successfully.";
 
             return RedirectToAction("ListQuestions", "Home"); 
         }

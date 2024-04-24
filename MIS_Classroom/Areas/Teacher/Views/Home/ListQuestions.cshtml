@@ -5,6 +5,12 @@
 }
 
 <h1 class="mt-5 mb-4">List of Questions</h1>
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.SuccessMessage
+    </div>
+}
 
 <div class="card">
     <div class="card-body">
