@@ -63,3 +63,6 @@
             background-color: #ffc107;
             color: #343a40;
         }
+        .sidebar a.active {
+            background-color: #6c757d;
+        }

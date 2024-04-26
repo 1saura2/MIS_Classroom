@@ -9,12 +9,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"]</title>
-  
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <style>
 
-        
-    </style>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
 </head>
 <body>
     <header>
@@ -24,13 +21,12 @@
                 <h2 class="text-center">Admin Dashboard</h2>
                 <ul class="list-unstyled">
                     <li class="mb-2">
-                        <a asp-area="Admin" asp-controller="Home" asp-action="ListTeacher">Teacher</a>
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "ListTeacher" ? "active" : "")" asp-area="Admin" asp-controller="Home" asp-action="ListTeacher">Teacher</a>
                     </li>
                     <li class="mb-2">
-                        <a asp-area="Admin" asp-controller="Home" asp-action="ListStudent">Student</a>
+                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "ListStudent" ? "active" : "")" asp-area="Admin" asp-controller="Home" asp-action="ListStudent">Student</a>
                     </li>
                 </ul>
-@*                 <a class="btn btn-danger" asp-area="Home" asp-controller="Home" asp-action="Logout">Logout</a> *@
             </div>
         </div>
     </header>
