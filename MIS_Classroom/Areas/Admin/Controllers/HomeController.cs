@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Microsoft.EntityFrameworkCore;
 using MIS_Classroom.Areas.Admin.Models;
 using MIS_Classroom.Models;
 using NuGet.DependencyResolver;
+using System.Net;
+using System.Net.Mail;
 
 namespace MIS_Classroom.Areas.Admin.Controllers
 {
@@ -255,8 +258,110 @@ namespace MIS_Classroom.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-        
+
             return View();
         }
+
+
+        [HttpGet]
+        public IActionResult SendPasswordResetEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest("Email is required.");
+            }
+
+            var student = _context.TechengineeMisStudents.FirstOrDefault(s => s.Email == email);
+            if (student == null)
+            {
+                return NotFound("Student with the provided email not found.");
+            }
+
+            string token = Guid.NewGuid().ToString();
+            TempData["ResetToken"] = token;
+           int id=student.StudentId;
+
+            SendResetEmail(id,email, token);
+
+            TempData["ResetEmailSent"] = "Password reset email has been sent.";
+
+            /*return RedirectToAction("EditStudent", new { id = student.StudentId });*/
+            return RedirectToAction(nameof(ListTeacher));
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string token, int id)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest("Invalid token.");
+            }
+
+            var model = new ResetPasswordViewModel { Token = token, Id=id };
+            return View("ResetPassword", model);
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(int id, string newPassword, string confirmPassword)
+        {
+            var student = _context.TechengineeMisStudents.FirstOrDefault(s => s.StudentId == id);
+            if (student == null)
+            {
+                return NotFound("Student not found.");
+            }
+
+            if (newPassword != confirmPassword)
+            {
+                ModelState.AddModelError(string.Empty, "New password and confirm password do not match.");
+                return View("EditStudent", student);
+            }
+
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword); ;
+            var credential = _context.TechengineeMisCredentials.FirstOrDefault(c => c.Email == student.Email);
+            if (credential == null)
+            {
+                return NotFound("Credential not found.");
+            }
+
+            credential.Password = hashedPassword;
+            _context.Update(credential);
+            _context.SaveChanges();
+
+            TempData["PasswordResetSuccess"] = "Password has been reset successfully.";
+            return RedirectToAction("Login", "Home", new { area = "" });
+
+
+        }
+
+
+
+        private void SendResetEmail(int id,string email, string token)
+        {
+            string smtpServer = "smtp.gmail.com";
+            int port = 587; 
+            string senderEmail = "atul.baral8421@gmail.com"; 
+            string senderPassword = "nemm arey koqy bmvm\r\n"; 
+
+           
+            using (SmtpClient client = new SmtpClient(smtpServer, port))
+            {
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(senderEmail, senderPassword);
+                client.EnableSsl = true; 
+
+                
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress(senderEmail);
+                mailMessage.To.Add(email);
+                mailMessage.Subject = "Password Reset";
+                mailMessage.Body = $"Click the following link to reset your password: https://localhost:7173/Admin/Home/ResetPassword?id={id}&token={token}";
+
+                // Send email
+                client.Send(mailMessage);
+            }
+        }
     }
+
 }
+
+

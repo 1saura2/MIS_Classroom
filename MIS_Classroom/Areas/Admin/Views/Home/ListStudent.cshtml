@@ -27,6 +27,8 @@
                 <td>
                     <a href="/Admin/Home/EditStudent/@student.StudentId" class="btn btn-sm btn-warning btn-management">Edit</a>
                     <button type="button" class="btn btn-sm btn-danger btn-management delete-button" data-student-id="@student.StudentId" data-student-email="@student.Email">Delete</button>
+                    <a href="/Admin/Home/SendPasswordResetEmail?email=@student.Email" class="btn btn-warning ">Reset Password</a>
+
                 </td>
             </tr>
         }
