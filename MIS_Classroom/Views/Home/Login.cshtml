@@ -2,6 +2,13 @@
     ViewData["Title"] = "Login";
 }
 
+@if (TempData.ContainsKey("PasswordResetSuccess"))
+{
+    <script>
+        alert("@TempData["PasswordResetSuccess"]");
+    </script>
+}
+
 <style>
     
 
