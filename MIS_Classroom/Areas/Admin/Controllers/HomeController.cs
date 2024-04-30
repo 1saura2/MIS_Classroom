@@ -286,7 +286,7 @@ namespace MIS_Classroom.Areas.Admin.Controllers
             TempData["ResetEmailSent"] = "Password reset email has been sent.";
 
             /*return RedirectToAction("EditStudent", new { id = student.StudentId });*/
-            return RedirectToAction(nameof(ListTeacher));
+            return RedirectToAction(nameof(ListStudent));
         }
 
         [HttpGet]
