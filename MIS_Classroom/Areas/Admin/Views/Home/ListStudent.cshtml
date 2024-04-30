@@ -10,6 +10,13 @@
     </script>
 }
 
+@if (TempData["StudentAdd"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["StudentAdd"]
+    </div>
+}
+
 <h2>Student Management</h2>
 <a href="/Admin/Home/AddStudent" class="btn btn-primary btn-management" id="addStudentBtn">Add Student</a>
 <table class="management-table table mt-3">

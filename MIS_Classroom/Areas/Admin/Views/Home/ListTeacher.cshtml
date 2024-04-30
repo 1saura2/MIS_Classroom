@@ -4,6 +4,12 @@
 }
 
 <h2>Teacher Management</h2>
+@if (TempData["TeacherAdd"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["TeacherAdd"]
+    </div>
+}
 <a href="/Admin/Home/AddTeacher" class="btn btn-primary btn-management" id="addTeacherBtn">Add Teacher</a>
 <table class="management-table table mt-3">
     <thead>

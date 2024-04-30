@@ -62,6 +62,8 @@ namespace MIS_Classroom.Areas.Admin.Controllers
             _context.TechengineeMisCredentials.Add(credential);
             _context.SaveChanges();
 
+            TempData["TeacherAdd"] = "Teacher Added Successfully.";
+
             return RedirectToAction(nameof(ListTeacher));
         }
 
@@ -159,6 +161,8 @@ namespace MIS_Classroom.Areas.Admin.Controllers
 
             _context.TechengineeMisCredentials.Add(credential);
             _context.SaveChanges();
+
+            TempData["StudentAdd"] = "Student Added Successfully.";
 
             return RedirectToAction(nameof(ListStudent));
         }

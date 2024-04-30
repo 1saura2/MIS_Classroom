@@ -121,6 +121,8 @@ namespace MIS_Classroom.Areas.Teacher.Controllers
             _context.TechengineeMisQuestions.Add(question);
             _context.SaveChanges();
 
+            TempData["SuccessfullyAdd"] = "Question Added Successfully.";
+
 
             return RedirectToAction("AddQuestion", "Home");
         }
