@@ -3,6 +3,19 @@
 @{
     Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@if (TempData.ContainsKey("ResetEmailSent"))
+{
+    <script>
+        alert("@TempData["ResetEmailSent"]");
+    </script>
+}
+
+@if (TempData["StudentAdd"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["StudentAdd"]
+    </div>
+}
 
 <h2>Student Management</h2>
 <a href="/Admin/Home/AddStudent" class="btn btn-primary btn-management" id="addStudentBtn">Add Student</a>
